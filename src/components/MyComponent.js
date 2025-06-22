@@ -1,6 +1,6 @@
 
 import React from 'react';
-import UserInfor from './UserInfor';
+import AddUserInfor from './AddUserInfor';
 import DisplayInfor from './DisplayInfor';
 // 
 class MyComponent extends React.Component {
@@ -12,17 +12,40 @@ class MyComponent extends React.Component {
             { id: 3, name: 'Khanh', age: 18 }
         ]
     }
-
-
+    handlerAddNewUser = (userObj) => {
+        //    let listUsersNew = this.state.listUsers;
+        //    listUsersNew.unshift(userObj);
+        //    this.setState({
+        //         listUsers: listUsersNew
+        //    })
+            this.setState({
+                listUsers: [userObj, ...this.state.listUsers]
+            })
+    }
+    handlerDeleteUser = (userId) => {
+        let listUserClone = this.state.listUsers;
+        listUserClone = listUserClone.filter(item => item.id !== userId);
+        this.setState({
+            listUsers: listUserClone
+        })
+    }
     render() {
         // Don't repeat yourself
+
+
         return (
-            <div>
-                <UserInfor></UserInfor>
+            <>
+                <div className='a'>
+                <AddUserInfor handlerAddNewUser = {this.handlerAddNewUser}></AddUserInfor>
                 <br></br>
                 <DisplayInfor listUsers={this.state.listUsers}
+                              handlerDeleteUser={this.handlerDeleteUser}
                                ></DisplayInfor>
             </div>
+            <div className= 'b'>
+
+            </div>
+            </>
         );
     }
 }

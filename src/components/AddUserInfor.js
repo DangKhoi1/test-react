@@ -1,6 +1,6 @@
 import React from 'react';
 
-class UserInfor extends React.Component {
+class AddUserInfor extends React.Component {
 
     state = {
         name: 'Khoi',
@@ -19,7 +19,13 @@ class UserInfor extends React.Component {
     
     handlerOnSubmit = (event) => {
         event.preventDefault();
-        console.log('Check submit: ', this.state);
+        this.props.handlerAddNewUser(
+            {
+                id: Math.floor(Math.random() * 100) + 1  + '-random',
+                name: this.state.name,
+                age: this.state.age
+            }
+        )
     }
 
     handlerOnChangeInput = (event) => {
@@ -37,12 +43,12 @@ class UserInfor extends React.Component {
                 <button onMouseOver={this.OneventHandler}>Hover</button> */}
                 <form onSubmit = {(event) => this.handlerOnSubmit(event)}>
                     <label>Tên của bạn:</label>
-                    <input  value = {this.state.name} 
+                    <input  /*value = {this.state.name}*/ 
                             type='text'
                             onChange = {(event) => this.handlerOnChangeInput(event)}
                             ></input>
                     <label>Tuổi của bạn:</label>
-                    <input  value = {this.state.age} 
+                    <input  /*value = {this.state.name}*/
                             type='text'
                             onChange = {(event) => this.handlerOnChangeAge(event)}
                             ></input>
@@ -57,4 +63,4 @@ class UserInfor extends React.Component {
 
 }
 
-export default UserInfor;
+export default AddUserInfor;
