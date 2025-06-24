@@ -6,6 +6,7 @@ import './DisplayInfor.scss';
 class DisplayInfor extends React.Component {
 
     constructor(props) {
+        console.log('Constructor from DisplayInfor: 1');
         super(props);
         //babel compiler
         this.state = {
@@ -19,9 +20,24 @@ class DisplayInfor extends React.Component {
                 isShowListUsers: !this.state.isShowListUsers
             }); 
         }
+    
+        componentDidMount() {
+            console.log('Component DisplayInfor mounted');
+            setTimeout(() => {
+                document.title = 'Huynh Dang Khoi - ReactJS';
+            }, 3000);
+        }
 
-
+       componentDidUpdate(prevProps, prevState, snapshot) {   
+            console.log('Component DisplayInfor updated', this.props, prevProps);
+            if(this.props.listUsers !== prevProps.listUsers) {
+                if(this.props.listUsers.length === 5) {
+                    alert('you have 5 users');
+                }
+            }
+        }
     render() {
+        console.log('Render from DisplayInfor: 2');
         // console.log('Props from parent component: ', this.props);
         // const { name, age } = this.props;
         const { listUsers } = this.props;
